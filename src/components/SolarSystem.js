@@ -22,9 +22,15 @@ function SolarSystem() {
         mountRef.current.appendChild(renderer.domElement);
 
         // Lighting
-        const light = new THREE.PointLight(0xffffff, 10000, 500000);
-        light.position.set(0, 0, 0);
-        scene.add(light);
+        const sunLight = new THREE.PointLight(0xffffff, 10000, 50000);
+        //sunLight.target.position.set(0, 0, 0);  // Pointing outward from the Sun
+        sunLight.position.set(0, 0, 0); // Position at the Sun
+        scene.add(sunLight);
+        //scene.add(sunLight.target);  // Make sure to add the target to the scene
+
+        // Ambient light for overall illumination
+        const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
+        scene.add(ambientLight);
 
         // Controls for easy navigation
         const controls = new OrbitControls(camera, renderer.domElement);
@@ -40,72 +46,73 @@ function SolarSystem() {
             Saturn: textureLoader.load('textures/saturn.jpeg'),
             Uranus: textureLoader.load('textures/uranus.jpeg'),
             Neptune: textureLoader.load('textures/neptune.jpeg'),
-            Pluto: textureLoader.load('textures/pluto.jpeg')
+            Pluto: textureLoader.load('textures/pluto.webp')
         };
         // Define texture for Saturn's rings
         const ringTexture = new THREE.TextureLoader().load('textures/saturn_rings.png');
 
         // Body configurations.
+        const baseDistance = 50;
         // Sun Configuration (remains the same)
-        const sunSize = 10;  // Arbitrary size for visualization
+        const sunSize = 30;  // Arbitrary size for visualization
         const sunPosition = [0, 0, 0];  // Central position
 
         // Mercury
-        const mercurySize = 0.7;
-        const mercuryDistance = 20;
+        const mercurySize = 0.383;
+        const mercuryDistance = baseDistance * 1;
         const mercuryPosition = [mercuryDistance, 0, 0]
 
         // Venus
         const venusSize = 0.95;
-        const venusDistance = 30;
+        const venusDistance = baseDistance * 1.2;
         const venusPosition = [venusDistance, 0, 0]
 
         // Earth Configuration (adjusted for visual scale)
         const earthSize = 1;  // Scaled size relative to the sun
-        const earthDistance = 40;  // Adjusted for visualization, not exact scale
+        const earthDistance = baseDistance * 1.5;  // Adjusted for visualization, not exact scale
         const earthPosition = [earthDistance, 0, 0];  // Positioned along the x-axis for simplicity
         
         // Mars
-        const marsSize = 0.8;
-        const marsDistance = 50;
+        const marsSize = 0.532;
+        const marsDistance = baseDistance * 1.75;
         const marsPosition = [marsDistance, 0, 0]
 
         // Jupiter
-        const jupiterSize = 7;
-        const jupiterDistance = 70;
+        const jupiterSize = 11;
+        const jupiterDistance = baseDistance * 2.5;
         const jupiterPosition = [jupiterDistance, 0, 0]
 
         // Saturn
-        const saturnSize = 6;
-        const saturnDistance = 100;
+        const saturnSize = 9;
+        const saturnDistance = baseDistance * 3.5;
         const saturnPosition = [saturnDistance, 0, 0]
 
         // Uranus
-        const uranusSize = 5;
-        const uranusDistance = 130;
+        const uranusSize = 4;
+        const uranusDistance = baseDistance * 4.25;
         const uranusPosition = [uranusDistance, 0, 0]
 
         // Neptune
         const neptuneSize = 4;
-        const neptuneDistance = 150;
+        const neptuneDistance = baseDistance * 4.75;
         const neptunePosition = [neptuneDistance, 0, 0]
 
         // Pluto
-        const plutoSize = 0.4;
-        const plutoDistance = 160;
+        const plutoSize = 0.2;
+        const plutoDistance = baseDistance * 5.25;
         const plutoPosition = [plutoDistance, 0, 0]
 
         const bodies = [
             { name: 'Sun', position: sunPosition, size: sunSize, color: 0xFFFF00, emissive: 0xFFFFA1 },
-            { name: 'Mercury', position: mercuryPosition, size: 0.7 },
-            { name: 'Venus', position: venusPosition, size: 0.95 },
-            { name: 'Earth', position: earthPosition, size: 1 },
-            { name: 'Mars', position: marsPosition, size: 0.8 },
-            { name: 'Jupiter', position: jupiterPosition, size: 7 },
-            { name: 'Saturn', position: saturnPosition, size: 6 },
-            { name: 'Uranus', position: uranusPosition, size: 5 },
-            { name: 'Neptune', position: neptunePosition, size: 4 },
-            { name: 'Pluto', position: plutoPosition, size: 0.4 }
+            { name: 'Mercury', position: mercuryPosition, size: mercurySize },
+            { name: 'Venus', position: venusPosition, size: venusSize },
+            { name: 'Earth', position: earthPosition, size: earthSize },
+            { name: 'Mars', position: marsPosition, size: marsSize },
+            { name: 'Jupiter', position: jupiterPosition, size: jupiterSize },
+            { name: 'Saturn', position: saturnPosition, size: saturnSize },
+            { name: 'Uranus', position: uranusPosition, size: uranusSize },
+            { name: 'Neptune', position: neptunePosition, size: neptuneSize },
+            { name: 'Pluto', position: plutoPosition, size: plutoSize}
         ];
         
         // Create and add celestial bodies to the scene
@@ -137,8 +144,8 @@ function SolarSystem() {
 
         // Function to create Saturn's rings
         function createSaturnRings() {
-            const innerRadius = 8;
-            const outerRadius = 14;
+            const innerRadius = 12;
+            const outerRadius = 22;
             const thetaSegments = 128;  // Number of segments, increase for smoother rings
         
             // Create ring geometry using THREE.RingGeometry
