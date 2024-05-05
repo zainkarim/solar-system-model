@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <main>
-        <SolarSystem />  // Main content area where the solar system is rendered
+        <SolarSystem />
       </main>
     </div>
   );

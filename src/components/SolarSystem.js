@@ -10,7 +10,6 @@ function SolarSystem() {
     const celestialBodies = useRef([]);
     const textureLoader = new THREE.TextureLoader();  // Create a texture loader
 
-
     useEffect(() => {
         // Scene setup
         const scene = new THREE.Scene();
@@ -20,9 +19,32 @@ function SolarSystem() {
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         mountRef.current.appendChild(renderer.domElement);
+        
+        // Define rotation periods relative to Earth's day (in Earth days)
+        const rotationSpeeds = {
+            Mercury: 58.6,
+            Venus: 243,
+            Earth: 1,
+            Mars: 1.026,
+            Jupiter: 0.413,
+            Saturn: 0.444,
+            Uranus: 0.718,
+            Neptune: 0.671,
+            Pluto: 6.39
+        };
+
+        // Time scale factor (1 second of real time represents this many Earth days)
+        const timeScale = 0.0005; // Slow down the rotation by a factor of 10      
+
+        // Convert rotation periods to radians per second
+        const rotationRadians = {};
+        Object.keys(rotationSpeeds).forEach(planet => {
+            rotationRadians[planet] = 2 * Math.PI / (rotationSpeeds[planet]) * timeScale;
+        });
+
 
         // Lighting
-        const sunLight = new THREE.PointLight(0xffffff, 10000, 50000);
+        const sunLight = new THREE.PointLight(0xffffff, 11000, 50000);
         //sunLight.target.position.set(0, 0, 0);  // Pointing outward from the Sun
         sunLight.position.set(0, 0, 0); // Position at the Sun
         scene.add(sunLight);
@@ -117,7 +139,7 @@ function SolarSystem() {
         
         // Create and add celestial bodies to the scene
         bodies.forEach(body => {
-            const { name, size, color, emissive, position } = body;
+            const { name, size, emissive, position } = body;
             const texture = textures[name];
             const geometry = new THREE.SphereGeometry(size, 32, 32);
             const material = new THREE.MeshLambertMaterial({
@@ -130,12 +152,14 @@ function SolarSystem() {
             });
             const mesh = new THREE.Mesh(geometry, material);
             mesh.position.set(...position);
+            mesh.userData.name = name;
             scene.add(mesh);
         
             if (name === 'Saturn') {
                 const rings = createSaturnRings();
                 rings.position.set(...position);
                 scene.add(rings);
+                rings.userData.name = name;
                 celestialBodies.current.push(rings);  // Also store rings for cleanup
             }            
         
@@ -178,6 +202,11 @@ function SolarSystem() {
         
         const animate = () => {
             requestAnimationFrame(animate);
+            celestialBodies.current.forEach(mesh => {
+                if (mesh.userData.name && rotationRadians[mesh.userData.name]) {
+                    mesh.rotation.y += rotationRadians[mesh.userData.name];
+                }
+            });
             renderer.render(scene, camera);
         };
 
