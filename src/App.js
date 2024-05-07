@@ -1,15 +1,13 @@
 import React from 'react';
-import './App.css';  // Importing CSS for overall styling
-import SolarSystem from './components/SolarSystem';  // Import the main Solar System component
+import SolarSystem from './components/SolarSystem';
 
 function App() {
   return (
     <div className="App">
-      <main>
-        <SolarSystem />
-      </main>
+      <SolarSystem />
     </div>
   );
 }
 
 export default App;
+ 
