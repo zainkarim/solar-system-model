@@ -10,8 +10,8 @@ This project presents a 3D visualization of the solar system using Three.js, all
 - **Planet Details**: Click on any celestial body's button to get detailed information on the server terminal such as its diameter, distance from the sun, and interesting facts.
 
 <div style="display:flex">
-    <img src="./images/saturn_screenshot.png" alt="Saturn Screenshot" style="width:50%; margin-right:5px;">
-    <img src="./images/terminal_screenshot.png" alt="Terminal Screenshot" style="width:50%;">
+    <img src="./images/saturn_screenshot.png" alt="Saturn Screenshot" style="width:100%; margin-right:5px;">
+    <img src="./images/terminal_screenshot.png" alt="Terminal Screenshot" style="width:100%;">
 </div>
 
 ## Technologies Used
