@@ -9,6 +9,11 @@ This project presents a 3D visualization of the solar system using Three.js, all
 - **Interactive Controls**: Users can manipulate the camera to explore the solar system from different angles.
 - **Planet Details**: Click on any celestial body's button to get detailed information on the server terminal such as its diameter, distance from the sun, and interesting facts.
 
+<div style="display:flex">
+    <img src="./images/saturn_screenshot.png" alt="Saturn Screenshot" style="width:50%; margin-right:5px;">
+    <img src="./images/terminal_screenshot.png" alt="Terminal Screenshot" style="width:50%;">
+</div>
+
 ## Technologies Used
 - **Three.js**: For 3D visualization
 - **React**: UI library used for handling the frontend
