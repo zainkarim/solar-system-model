@@ -2,11 +2,15 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import AudioControl from './AudioControl';
+import PlanetInfo from './PlanetInfo';
+import axios from 'axios';
 
 
 const SolarSystem = () => {
     const mountRef = useRef(null);
     const [activeCamera, setActiveCamera] = useState('camera');
+    const [planetInfo, setPlanetInfo] = useState(null);
+    const [selectedPlanet, setSelectedPlanet] = useState(null);
 
     useEffect(() => {
         const currentMount = mountRef.current;
@@ -307,7 +311,7 @@ const SolarSystem = () => {
             map: ringTexture,
             side: THREE.DoubleSide,
             transparent: true,
-            opacity: 0.5
+            opacity: 0.75
         });
 
         // Create mesh with the geometry and material
@@ -553,12 +557,43 @@ const SolarSystem = () => {
         setActiveCamera(cameraName);
     }
 
+    const bodies = [
+        { name: 'Mercury', apiName: 'mercury'},
+        { name: 'Venus', apiName: 'venus'},
+        { name: 'Earth', apiName: 'earth'},
+        { name: 'Moon', apiName: 'moon'},
+        { name: 'Mars', apiName: 'mars'},
+        { name: 'Jupiter', apiName: 'jupiter'},
+        { name: 'Saturn', apiName: 'saturn'},
+        { name: 'Uranus', apiName: 'uranus'},
+        { name: 'Pluto', apiName: 'pluto'},
+        { name: 'Sun', apiName: 'sun'}
+    ]
+
+    const handlePlanetClick = (planetName) => {
+        setSelectedPlanet(planetName);  // This should just handle the name
+        axios.get(`http://127.0.0.1:5001/planets/${planetName}`)
+            .then(response => {
+                console.log("Data received:", response.data);
+                setPlanetInfo(response.data);  // This handles the full planet data
+            })
+            .catch(error => {
+                console.error('Error fetching planet data:', error);
+            });
+    };    
+
     return (
         <div ref={mountRef} style={{ width: '100%', height: '100vh' }}>
             <AudioControl src="Ambient Pad in C Major.mp3" />
             <button onClick={() => switchCamera('resetCamera')} style={{ position: 'absolute', top: 10, left: 90, zIndex: 100 }}>
                 Reset Camera
             </button>
+            {bodies.map((planet, index) => (
+                <button key={index} onClick={() => handlePlanetClick(planet.apiName)} style={{ position: 'absolute', top: 20 + index * 30, left: 10, zIndex: 100 }}>
+                    {planet.name}
+                </button>
+            ))}
+            {planetInfo && <PlanetInfo planetName={selectedPlanet} onClose={() => setPlanetInfo(null)} />}
         </div>
     );
 };
