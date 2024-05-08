@@ -10,8 +10,6 @@ This project presents a 3D visualization of the solar system using Three.js, all
 - **Planet Details**: Click on any celestial body's button to get detailed information on the server terminal such as its diameter, distance from the sun, and interesting facts.
 
 <div style="display:flex">
-    <img src="./images/solar_system_screenshot.png" alt="Solar System Screenshot" style="width:100%;
-    ">
     <img src="./images/saturn_screenshot.png" alt="Saturn Screenshot" style="width:100%; margin-right:5px;">
     <img src="./images/terminal_screenshot.png" alt="Terminal Screenshot" style="width:100%;
     ">
@@ -33,16 +31,9 @@ To get this project running on your local machine, follow these steps:
    ```
 
 2. **Install Dependencies**
-   - For the Node server:
-     ```bash
-     cd server
-     npm install
-     ```
-   - For the React client:
-     ```bash
-     cd client
-     npm install
-     ```
+   ```bash
+   npm install
+   ```
 
 3. **Database Setup**
    - Make sure MySQL is installed on your system.
@@ -50,7 +41,7 @@ To get this project running on your local machine, follow these steps:
      ```sql
      CREATE DATABASE solar_system;
      USE solar_system;
-     SOURCE path_to_your_sql_script.sql;
+     SOURCE solar_system.session.sql;
      ```
 
 4. **Environment Variables**
