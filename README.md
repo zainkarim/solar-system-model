@@ -9,6 +9,11 @@ This project presents a 3D visualization of the solar system using Three.js, all
 - **Interactive Controls**: Users can manipulate the camera to explore the solar system from different angles.
 - **Planet Details**: Click on any celestial body's button to get detailed information on the server terminal such as its diameter, distance from the sun, and interesting facts.
 
+## Videos
+https://github.com/zainkarim/solar-system-model/assets/13271328/a8b38868-c28e-4391-aa76-b827e4602152
+https://github.com/zainkarim/solar-system-model/assets/13271328/eacc7025-35cf-4904-9de3-86b77e6ecc1e
+
+## Images
 <div style="display:flex">
     <img src="./images/saturn_screenshot.png" alt="Saturn Screenshot" style="width:100%; margin-right:5px;">
     <img src="./images/terminal_screenshot.png" alt="Terminal Screenshot" style="width:100%;
