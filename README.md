@@ -56,14 +56,13 @@ To get this project running on your local machine, follow these steps:
 
 5. **Start the Server**
    ```bash
-   npm start
+   node index.js
    ```
 
 6. **Run the Client**
-   - Open a new terminal in the client directory:
-     ```bash
-     npm start
-     ```
+   ```bash
+   npm start
+   ```
 
 ## Usage
 Once the installation is complete and both the server and client are running:
