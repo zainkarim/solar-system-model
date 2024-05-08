@@ -1,70 +1,78 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Solar System Visualization
 
-## Available Scripts
+## Description
+This project presents a 3D visualization of the solar system using Three.js, allowing users to explore the various celestial bodies from the comfort of their browser. Users can click on different buttons associated with different celestial bodies to view detailed information on the server terminal, and control the camera to get different views of the solar system.
 
-In the project directory, you can run:
+## Features
+- **3D Visualization**: Detailed 3D models of planets and their orbits.
+- **Interactive Controls**: Users can manipulate the camera to explore the solar system from different angles.
+- **Planet Details**: Click on any celestial body's button to get detailed information on the server terminal such as its diameter, distance from the sun, and interesting facts.
 
-### `npm start`
+## Technologies Used
+- **Three.js**: For 3D visualization
+- **React**: UI library used for handling the frontend
+- **Node.js and Express**: Backend server to serve the planet data
+- **MySQL**: Database to store information about the planets
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
+To get this project running on your local machine, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/zainkarim/solar-system-model.git
+   cd solar-system-model
+   ```
 
-### `npm test`
+2. **Install Dependencies**
+   - For the Node server:
+     ```bash
+     cd server
+     npm install
+     ```
+   - For the React client:
+     ```bash
+     cd client
+     npm install
+     ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Database Setup**
+   - Make sure MySQL is installed on your system.
+   - Create a database named `solar_system` and import the provided SQL script to set up your tables:
+     ```sql
+     CREATE DATABASE solar_system;
+     USE solar_system;
+     SOURCE path_to_your_sql_script.sql;
+     ```
 
-### `npm run build`
+4. **Environment Variables**
+   - Set up your `.env` file in the server directory with the following contents:
+     ```
+     DB_HOST=localhost
+     DB_USER=your_mysql_username
+     DB_PASS=your_mysql_password
+     DB_NAME=solar_system
+     PORT=5001
+     ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. **Start the Server**
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+6. **Run the Client**
+   - Open a new terminal in the client directory:
+     ```bash
+     npm start
+     ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
+Once the installation is complete and both the server and client are running:
+- Open your browser to `http://localhost:3000`.
+- Use the mouse to rotate and zoom the camera.
+- Click on any celestial body's to display detailed information about it in the development terminal.
 
-### `npm run eject`
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Link: [https://github.com/zainkarim/solar-system-model](https://github.com/zainkarim/solar-system-model)

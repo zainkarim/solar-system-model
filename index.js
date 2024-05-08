@@ -15,27 +15,22 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME
 });
 
-// Unified endpoint using a safer query from server.js
+// Endpoint to get planet details by name
 app.get('/planets/:name', (req, res) => {
-  console.log(`Fetching data for planet: ${req.params.name}`);
-  const sql = `SELECT * FROM planets WHERE name = ?`;
-  db.query(sql, [req.params.name], (err, result) => {
+  const sql = `SELECT * FROM planets WHERE name = ${db.escape(req.params.name)}`;
+  db.query(sql, (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal server error' });
     }
     if (result.length === 0) {
-      console.log('Planet not found');
       return res.status(404).json({ error: 'Planet not found' });
     }
-    console.log('Data sent:', result[0]);
     res.json(result[0]);
   });
 });
 
-
-
-const port = process.env.PORT || 5001; // Use environment variable if available
+const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
