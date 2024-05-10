@@ -80,7 +80,7 @@ To get this project running on your local machine, follow these steps:
 Once the installation is complete and both the server and client are running:
 - Open your browser to `http://localhost:3000`.
 - Use the mouse to rotate and zoom the camera.
-- Click on any celestial body's to display detailed information about it in the development terminal.
+- Click on any celestial body's button to display detailed information about it in the development terminal.
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
